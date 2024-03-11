@@ -56,7 +56,11 @@ public class Tower : MonoBehaviour
     }
     protected void attack()
     {
+        if(Time.time-lastAttackTime > attackCooldown) {
+            
+            lastAttackTime = Time.time;
 
+        }
     }
     protected void EnemyInRange()
     {
