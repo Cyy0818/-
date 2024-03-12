@@ -63,8 +63,12 @@ public class PlaceUnit : MonoBehaviour
         if(Time.time-lastAttackTime > attackCooldown) {
             
             lastAttackTime = Time.time;
+<<<<<<< Updated upstream:Project_E/Assets/Scripts/PlaceUnit.cs
             //每次记录下开火的系统时间，用系统时间减去开火时间，如果大于冷却时间，则攻击。
 
+=======
+            
+>>>>>>> Stashed changes:Project_E/Assets/Scripts/Tower.cs
         }
     }
     protected void EnemyInRange()
