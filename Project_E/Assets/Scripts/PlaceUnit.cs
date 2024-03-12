@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Tower : MonoBehaviour
+public class PlaceUnit : MonoBehaviour
 {
     [Header("UI")]
     public int level;
@@ -12,9 +12,13 @@ public class Tower : MonoBehaviour
     public Slider HPMax;
     public Slider time;
 
-    [Header("tower attack")]
-    public GameObject TowerPrefab;
+    [Header("PlaceUnit attack")]
+    public GameObject PlaceUnitPrefab;
     public GameObject bulletPrefab;
+
+    [Header("Upgrade")]
+    public GameObject PlaceUnitUpGradePrefab;
+    public int levelupcost;
 
     [Header("attack range")]
     public Collider attackrange;
@@ -23,35 +27,35 @@ public class Tower : MonoBehaviour
 
     [Header("time for attacking")]
     public float attackCooldown = 2.0f;
-    private float lastAttackTime;
+    private float lastAttackTime=0.0f;
 
 
     void CreateAttackRangeIndicator()
     {
-        // ´´½¨¹¥»÷·¶Î§Ö¸Ê¾Æ÷
+        // åˆ›å»ºæ”»å‡»èŒƒå›´æŒ‡ç¤ºå™¨
         attackRangeIndicator = Instantiate(attackRangeIndicatorPrefab, transform.position, Quaternion.identity);
-        // Òş²Ø¹¥»÷·¶Î§Ö¸Ê¾Æ÷
+        // éšè—æ”»å‡»èŒƒå›´æŒ‡ç¤ºå™¨
         attackRangeIndicator.SetActive(false);
     }
     void ShowAttackRangeIndicator()
     {
-        // ÏÔÊ¾¹¥»÷·¶Î§Ö¸Ê¾Æ÷
+        // æ˜¾ç¤ºæ”»å‡»èŒƒå›´æŒ‡ç¤ºå™¨
         attackRangeIndicator.SetActive(true);
     }
     void HideAttackRangeIndicator()
     {
-        // Òş²Ø¹¥»÷·¶Î§Ö¸Ê¾Æ÷
+        // éšè—æ”»å‡»èŒƒå›´æŒ‡ç¤ºå™¨
         attackRangeIndicator.SetActive(false);
     }
     void OnMouseOver()
     {
-        // Êó±êĞüÍ£ÔÚËşÉÏÊ±ÏÔÊ¾¹¥»÷·¶Î§Ö¸Ê¾Æ÷
+        // é¼ æ ‡æ‚¬åœåœ¨å¡”ä¸Šæ—¶æ˜¾ç¤ºæ”»å‡»èŒƒå›´æŒ‡ç¤ºå™¨
         ShowAttackRangeIndicator();
     }
 
     void OnMouseExit()
     {
-        // Êó±êÀë¿ªËşÊ±Òş²Ø¹¥»÷·¶Î§Ö¸Ê¾Æ÷
+        // é¼ æ ‡ç¦»å¼€å¡”æ—¶éšè—æ”»å‡»èŒƒå›´æŒ‡ç¤ºå™¨
         HideAttackRangeIndicator();
     }
     protected void attack()
@@ -59,6 +63,7 @@ public class Tower : MonoBehaviour
         if(Time.time-lastAttackTime > attackCooldown) {
             
             lastAttackTime = Time.time;
+            //æ¯æ¬¡è®°å½•ä¸‹å¼€ç«çš„ç³»ç»Ÿæ—¶é—´ï¼Œç”¨ç³»ç»Ÿæ—¶é—´å‡å»å¼€ç«æ—¶é—´ï¼Œå¦‚æœå¤§äºå†·å´æ—¶é—´ï¼Œåˆ™æ”»å‡»ã€‚
 
         }
     }
@@ -84,4 +89,15 @@ public class Tower : MonoBehaviour
     {
         
     }
+}
+
+public enum PlaceUnitType
+{
+    WhitePlaceUnit,
+    RedPlaceUnit,
+    BluePlaceUnit,
+    ResourceUnit,
+    PlacedWall,
+    LandMine,
+    Bomb
 }
