@@ -4,7 +4,7 @@ using Attacker;
 using UnityEngine;
 public class AttackerSpawn : MonoBehaviour
 {
-    private int _attackerCounter;
+    public int attackerCounter;
     [SerializeField]private float timer = 1f;
     public NodeManager nodeManager;
   
@@ -12,20 +12,16 @@ public class AttackerSpawn : MonoBehaviour
 
     private void Update()
     {
-        if (timer < 0)
+        if (timer < 0 && attackerCounter != 0)
         {
-            StartCoroutine(generate(attackers[0]));
+            var curAttacker = Instantiate(attackers[0],transform.position, Quaternion.identity);
+            curAttacker.GetComponent<AttackerBase>()._path = nodeManager.FindPath();
+            attackerCounter--;
+            timer = 1f;
         }
         else
         {
             timer -= Time.deltaTime;
         }
-    }
-
-    IEnumerator generate(GameObject Attacker)
-    {
-        yield return new WaitForSeconds(0.5f);
-        var curAttacker = Instantiate(Attacker,transform.position, Quaternion.identity);
-        curAttacker.GetComponent<AttackerBase>()._path = nodeManager.FindPath();
     }
 }
