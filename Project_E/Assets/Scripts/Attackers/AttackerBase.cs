@@ -63,6 +63,12 @@ namespace Attacker
                 }
             }
         }
+
+
+        public void GetDamage(int damage)
+        {
+            
+        }
     }
     
 }
