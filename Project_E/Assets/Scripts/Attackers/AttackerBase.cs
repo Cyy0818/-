@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Path;
@@ -64,7 +65,16 @@ namespace Attacker
             }
         }
 
-        public void GetDamage(int damage)
+        private void OnDestroy()
+        {
+            WaveManager.enemysAliveCounter--;
+        }
+
+        private void reachDestination()
+        {
+            GameObject.Destroy(this.gameObject);
+        }
+        private void GetDamage(int damage)
         {
             
         }

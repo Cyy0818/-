@@ -44,7 +44,7 @@ public class Attack : MonoBehaviour
         }
     }
 
-    void attack()
+    private void attack()
     {
         //创建一个空物体放在塔的头部，来定位子弹生成的位置
         GameObject bullet= GameObject.Instantiate(bulletprefab, firepostion.position, firepostion.rotation);

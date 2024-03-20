@@ -79,7 +79,7 @@ public class PlaceManager : MonoBehaviour
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-                bool isCollider = Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("Map")); //将所有的地砖放到map的layer层
+                bool isCollider = Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("Map")); //将所有的地砖放到map（layer）层
                 if (isCollider)
                 {
                     GameObject MapBlock = hit.collider.gameObject;
