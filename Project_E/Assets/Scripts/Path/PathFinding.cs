@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Path
 {
@@ -33,15 +34,18 @@ namespace Path
                         path.Add(curPathNode);
                         curPathNode = curPathNode.Connection;
                     }
-    
+
+                    path.Reverse();
+                    //PrintPath(path);
                     return path;
                 }
-    
+                //Debug.Log("CurNode:" + current.X + "," + current.Y);
                 //添加Neighbor
-                if(nodes[current.X-1,current.Y] != null) current.Neighbors.Add(nodes[current.X-1,current.Y]);
-                if(nodes[current.X+1,current.Y] != null) current.Neighbors.Add(nodes[current.X+1,current.Y]);
-                if(nodes[current.X,current.Y-1] != null) current.Neighbors.Add(nodes[current.X,current.Y-1]);
-                if(nodes[current.X,current.Y+1] != null) current.Neighbors.Add(nodes[current.X,current.Y+1]);
+                current.Neighbors ??= new List<Node>();
+                if(current.X-1 >= 0) current.Neighbors.Add(nodes[current.X-1,current.Y]);
+                if(current.X+1 < nodes.GetLength(0)) current.Neighbors.Add(nodes[current.X+1,current.Y]);
+                if(current.Y-1 >= 0) current.Neighbors.Add(nodes[current.X,current.Y-1]);
+                if(current.Y+1 < nodes.GetLength(1)) current.Neighbors.Add(nodes[current.X,current.Y+1]);
                 
                 foreach (var neighbor in current.Neighbors.Where(n=>n.Type == E_Node_Type.Ground && !processed.Contains(n)))
                 {
@@ -62,7 +66,14 @@ namespace Path
     
             return null;
         }
-        
+
+        private static void PrintPath(List<Node> path)
+        {
+            foreach (var node in path)
+            {
+                Debug.Log("X: " + node.X + "Y: " + node.Y);
+            }
+        }
     }
 
 }
