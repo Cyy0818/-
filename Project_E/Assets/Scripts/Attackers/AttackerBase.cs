@@ -7,7 +7,7 @@ namespace Attacker
     public class AttackerBase : MonoBehaviour 
     {
         private AttackerSpawn _spawn;
-        private Rigidbody2D _rb;
+        private Rigidbody _rb;
         private int curNode = 0;
         public List<Node> _path;
         public float Health;
@@ -16,14 +16,8 @@ namespace Attacker
 
         private void Start()
         {
-            _rb = GetComponent<Rigidbody2D>();
+            _rb = GetComponent<Rigidbody>();
         }
-
-        public void BeHurt(float attack)
-        {
-            Health -= attack;
-        }
-
         private void Update()
         {
             if (Health <= 0)
@@ -36,20 +30,18 @@ namespace Attacker
         {
             MovePosition();
         }
-
-        private void Dead()
-        {
-            Destroy(transform);    
-        }
-        
         private void MovePosition()
         {
-            var targetPosition = _path[curNode].Position;
-            if (transform.position != targetPosition)
+            var targetPosition = new Vector3(_path[curNode].Position.x, _path[curNode].Position.y, -1);
+            Debug.Log("AttackerPostionX:" + transform.position.x + "AttackerPostionY:" + transform.position.y);
+            Debug.Log("TargetPositionX: " + _path[curNode].Position.x + "TargetPositionY: " + _path[curNode].Position.y);
+            var arrivalRange = 0.3f;
+            var distance = Vector3.Distance(transform.position, targetPosition);
+            if (distance > arrivalRange)
             {
                 var direction = (targetPosition - transform.position).normalized;
                 var movement = direction * (Speed * Time.fixedDeltaTime);
-                _rb.MovePosition(targetPosition+movement);
+                _rb.MovePosition(targetPosition + movement);
             }
             else
             {
@@ -60,23 +52,21 @@ namespace Attacker
                 else
                 {
                     _rb.velocity = Vector3.zero;
-                    _rb.angularVelocity = 0;
                 }
             }
         }
-
         private void OnDestroy()
         {
             WaveManager.enemysAliveCounter--;
         }
 
-        private void reachDestination()
+        private void Dead()
         {
             GameObject.Destroy(this.gameObject);
         }
-        private void GetDamage(int damage)
+        public void GetDamage(int damage)
         {
-            
+            Health -= damage;
         }
     }
     

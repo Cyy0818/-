@@ -18,7 +18,7 @@ namespace Path
 
         public Vector3 Position { get; private set; }
 
-        public List<Node> Neighbors { get; private set; }//相邻的节点
+        public List<Node> Neighbors;//相邻的节点
     
         public E_Node_Type Type { get; private set; }
     
@@ -28,7 +28,7 @@ namespace Path
             Y = y;
             Type = type;
             Position = position;
-            Debug.Log("X:" + X + "Y:" + Y + "Type:" + Type);
+            //Debug.Log("X:" + X + "Y:" + Y + "Type:" + Type);
         }
 
         public void SetG(int G)
