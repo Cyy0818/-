@@ -6,9 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="8fcacc52-7ce8-4db3-a5cf-2adf463624ba" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project_E/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project_E/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PathFindTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PathFindTest.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Attackers/AttackerBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Attackers/AttackerBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Path/Node.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Path/Node.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Path/PathFinding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Path/PathFinding.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Path/PathFindTest/PathTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Path/PathFindTest/PathTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Path/PathFindTest/attacker.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Path/PathFindTest/attacker.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +43,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "Attackers__Dev",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -53,13 +55,21 @@
   },
   "keyToStringList": {
     "rider.external.source.directories": [
-      "C:\\Users\\16159\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\16159\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\16159\\AppData\\Local\\Symbols\\src"
+      "C:\\Users\\Administrator\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache",
+      "C:\\Users\\Administrator\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache",
+      "C:\\Users\\Administrator\\AppData\\Local\\Symbols\\src"
     ]
   }
 }]]></component>
   <component name="RunManager" selected="独立播放器.Start Unity">
+    <configuration name="启动 Unity" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="D:\Program Files\UnityHUB\Editor\2021.3.35f1\Unity 2021.3.35f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath D:\GameManagement\CUSGA\projectE\Project_E -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="D:\GameManagement\CUSGA\projectE\Project_E" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="D:\Unity\Editor\2021.3.35f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath D:\Unity\Project\Project_E\Project_E -debugCodeOptimization" />
@@ -76,7 +86,15 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="单元测试(批处理模式)" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="D:\Program Files\UnityHUB\Editor\2021.3.35f1\Unity 2021.3.35f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\GameManagement\CUSGA\projectE\Project_E -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="D:\GameManagement\CUSGA\projectE\Project_E" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="附加到 Unity 编辑器并运行" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
@@ -86,7 +104,7 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="附加到 Unity 编辑器" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
@@ -109,6 +127,7 @@
       <workItem from="1710664634143" duration="2000" />
       <workItem from="1710682357057" duration="1267000" />
       <workItem from="1710735201574" duration="1437000" />
+      <workItem from="1711014615242" duration="3049000" />
     </task>
     <servers />
   </component>

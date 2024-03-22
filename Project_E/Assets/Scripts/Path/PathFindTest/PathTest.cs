@@ -15,7 +15,7 @@ public class PathTest : MonoBehaviour
         { 1, 0, 1, 1, 1, 1 },
         { 1, 0, 1, 0, 1, 0 },
         { 1, 1, 1, 1, 0, 0 },
-        { 0, 1, 1, 1, 1, 1 }
+        { 0, 1, 1, 1, 1, 1 },
     };
 
     public GameObject start;
@@ -45,7 +45,7 @@ public class PathTest : MonoBehaviour
         {
             for (int j = 0; j < cols; j++)
             {
-                var position = new Vector3(i, j, 0);
+                var position = new Vector3(j, rows - 1 - i, 0);
                 
                 if (Matrix[i, j] == 1)
                 {

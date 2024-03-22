@@ -13,6 +13,8 @@ namespace Attacker
         public float ATK;
         public float Speed;
 
+        private float _runTimer = 0.1f;
+
         private void Start()
         {
             _rb = GetComponent<Rigidbody>();
@@ -33,7 +35,15 @@ namespace Attacker
 
         private void FixedUpdate()
         {
-            MovePosition();
+            if (_runTimer <= 0)
+            {
+                MovePosition();
+                _runTimer = 0.1f;
+            }
+            else
+            {
+                _runTimer -= Time.fixedDeltaTime;
+            }
         }
 
         private void Dead()
