@@ -7,7 +7,6 @@ public class NodeManager : MonoBehaviour
     public Node StartNode;
     public Node TargetNode;
     public Node[,] MapNodes;
-
     public List<Node> Path;
 
     public List<Node> FindPath()

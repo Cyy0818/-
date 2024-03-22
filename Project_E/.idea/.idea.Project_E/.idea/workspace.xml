@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="8fcacc52-7ce8-4db3-a5cf-2adf463624ba" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/Assets/Scripts/Wave.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Assets/Scripts/Wave.cs.meta" afterDir="false" />
@@ -344,6 +345,9 @@
       <change beforePath="$PROJECT_DIR$/Assets/Sprites/Origin_Block.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Sprites/Origin_Block.jpg.meta" beforeDir="false" />
     </list>
+=======
+    <list default="true" id="8fcacc52-7ce8-4db3-a5cf-2adf463624ba" name="Changes" comment="" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
