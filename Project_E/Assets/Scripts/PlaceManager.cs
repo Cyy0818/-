@@ -32,7 +32,7 @@ public class PlaceManager : MonoBehaviour
     void ChangeMoney(int change=0)
     {
         money += change;
-        moneyText.text = "￥" + money;
+        moneyText.text = "Resources：" + money;
     }
 
     void Start()
@@ -70,16 +70,6 @@ public class PlaceManager : MonoBehaviour
                     else if (mapCube.PlaceUnitGo != null)
                     {
                         
-                        // 升级处理
-                        
-                        //if (mapCube.isUpgraded)
-                        //{
-                        //    ShowUpgradeUI(mapCube.transform.position, true);
-                        //}
-                        //else
-                        //{
-                        //    ShowUpgradeUI(mapCube.transform.position, false);
-                        //}
                         if (mapCube == selectedMapCube && upgradeCanvas.activeInHierarchy)
                         {
                             StartCoroutine(HideUpgradeUI());
@@ -95,8 +85,6 @@ public class PlaceManager : MonoBehaviour
             }
         }
     }
-    
-//判断选择什么单位
     public void OnWhiteSelected(bool isOn)
     {
         if (isOn)

@@ -7,7 +7,6 @@ public class AttackerSpawn : MonoBehaviour
     public int attackerCounter;
     [SerializeField]private float timer = 1f;
     public NodeManager nodeManager;
-  
     public List<GameObject> attackers;
 
     private void Update()

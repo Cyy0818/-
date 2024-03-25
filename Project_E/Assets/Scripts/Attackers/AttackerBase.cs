@@ -1,14 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Path;
+using UnityEngine.UI;
 namespace Attacker
 {
     public class AttackerBase : MonoBehaviour 
     {
         private AttackerSpawn _spawn;
+        private Slider hpSlider;
         private Rigidbody _rb;
         private int curNode = 0;
         public List<Node> _path;
+        public float totalHealth;
         public float Health;
         public float ATK;
         public float Speed;
@@ -23,14 +26,6 @@ namespace Attacker
         public void BeHurt(float attack)
         {
             Health -= attack;
-        }
-
-        private void Update()
-        {
-            if (Health <= 0)
-            {
-                Dead();
-            }
         }
 
         private void FixedUpdate()
@@ -78,9 +73,28 @@ namespace Attacker
         }
 
 
-        public void GetDamage(int damage)
+        void OnDestroy()
         {
-            
+            _spawn.attackerCounter--;
+        }
+
+        public void TakeDamage(float damage)
+        {
+            if (Health <= 0) return;
+            Health -= damage;
+            hpSlider.value = (float)Health / totalHealth;
+            if (Health <= 0)
+            {
+                Die();
+            }
+        }
+        void ReachDestination()
+        {
+            GameObject.Destroy(this.gameObject);
+        }
+        void Die()
+        {
+            Destroy(this.gameObject);
         }
     }
     
