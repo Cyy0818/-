@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlaceManager : MonoBehaviour
 {
@@ -12,10 +11,16 @@ public class PlaceManager : MonoBehaviour
     public PlaceUnit PlacedWall;
     public PlaceUnit LandMine;
     public PlaceUnit Bomb;
+    public int Resources = 100;
+    private PlaceUnit selectedPlaceUnit; //当前选择的炮台
 
-    private PlaceUnit selectedPlaceUnit;
-    //当前选择的炮台
-
+    public Text ResourcesText;
+    private void UpdateResources(int change=0)
+    {
+        Resources += change;
+        ResourcesText.text = "resources:"+Resources;
+    }
+//判断选择什么单位
     public void OnWhiteSelected(bool isOn)
     {
         if (isOn)
@@ -82,7 +87,27 @@ public class PlaceManager : MonoBehaviour
                 bool isCollider = Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("Map")); //将所有的地砖放到map（layer）层
                 if (isCollider)
                 {
-                    GameObject MapBlock = hit.collider.gameObject;
+                    MapCube mapCube = hit.collider.GetComponent<MapCube>();
+                    if (mapCube.PlaceUnitGo == null)
+                    {
+                        if (Resources >= selectedPlaceUnit.cost)
+                        {
+                            //钱够
+                            Resources -= selectedPlaceUnit.cost;
+                            mapCube.place(selectedPlaceUnit.PlaceUnitPrefab);
+                            UpdateResources(-selectedPlaceUnit.cost);
+                        }
+                        else
+                        {
+                            //钱不够
+                        }
+                        
+                        
+                    }
+                    else
+                    {
+                        Debug.Log("升级");
+                    }
                 }
             }
         }
