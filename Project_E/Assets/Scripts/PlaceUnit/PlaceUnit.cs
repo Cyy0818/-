@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Attacker;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlaceUnit : MonoBehaviour {
 
@@ -26,15 +27,7 @@ public class PlaceUnit : MonoBehaviour {
 
     public GameObject bulletPrefab;//子弹
     public Transform firePosition;
-    public Transform head;
-
-    public bool useLaser = false;
-
     public float damageRate = 70;
-
-    public LineRenderer laserRenderer;
-
-    public GameObject laserEffect;
 
     void Start()
     {
@@ -43,44 +36,11 @@ public class PlaceUnit : MonoBehaviour {
 
     void Update()
     {
-        if (Attackers.Count > 0 && Attackers[0] != null)
+        timer += Time.deltaTime;
+        if (Attackers.Count > 0 && timer >= attackRateTime)
         {
-            Vector3 targetPosition = Attackers[0].transform.position;
-            targetPosition.y = head.position.y;
-            head.LookAt(targetPosition);
-        }
-        if (useLaser == false)
-        {
-            timer += Time.deltaTime;
-            if (Attackers.Count > 0 && timer >= attackRateTime)
-            {
-                timer = 0;
-                Attack();
-            }
-        }
-        else if(Attackers.Count>0)
-        {
-            if (laserRenderer.enabled == false)
-                laserRenderer.enabled = true;
-            laserEffect.SetActive(true);
-            if (Attackers[0] == null)
-            {
-                UpdateAttackers();
-            }
-            if (Attackers.Count > 0)
-            {
-                laserRenderer.SetPositions(new Vector3[]{firePosition.position, Attackers[0].transform.position});
-                Attackers[0].GetComponent<AttackerBase>().BeHurt(damageRate *Time.deltaTime );
-                laserEffect.transform.position = Attackers[0].transform.position;
-                Vector3 pos = transform.position;
-                pos.y = Attackers[0].transform.position.y;
-                laserEffect.transform.LookAt(pos);
-            }
-        }
-        else
-        {
-            laserEffect.SetActive(false);
-            laserRenderer.enabled = false;
+            timer = 0;
+            Attack();
         }
     }
 

@@ -13,7 +13,8 @@ public class PlaceManager : MonoBehaviour
     public PlaceUnitData LandMine;
     public PlaceUnitData Bomb;
     private PlaceUnitData selectedPlaceUnitData; //当前选择的炮台
-    
+
+    public Slider resourceSlider;
     //表示当前选择的炮台(场景中的游戏物体)
     private MapCube selectedMapCube;
 
@@ -22,6 +23,8 @@ public class PlaceManager : MonoBehaviour
     public Animator moneyAnimator;
 
     private int money = 1000;
+
+    public int maxMoney;
 
     public GameObject upgradeCanvas;
 
@@ -32,6 +35,10 @@ public class PlaceManager : MonoBehaviour
     void ChangeMoney(int change=0)
     {
         money += change;
+        if (money >= maxMoney)
+        {
+            money = maxMoney;
+        }
         moneyText.text = "Resources：" + money;
     }
 
@@ -156,6 +163,7 @@ public class PlaceManager : MonoBehaviour
         if (money >= selectedMapCube.PlaceUnitData.costUpgraded)
         {
             ChangeMoney(-selectedMapCube.PlaceUnitData.costUpgraded);
+            resourceSlider.value =(int) money/ maxMoney;
             selectedMapCube.UpgradePlaceUnit();
         }
         else

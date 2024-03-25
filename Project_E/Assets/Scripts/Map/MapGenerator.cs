@@ -11,6 +11,7 @@ public class MapGenerator : MonoBehaviour
     
     public string matrixFilePath;
     public float size = 1.0f;
+    
     [Header("地图节点管理")]
     public NodeManager nodeManager;
 
@@ -90,7 +91,6 @@ public class MapGenerator : MonoBehaviour
     {
         int rows = matrix.GetLength(0);
         int columns = matrix.GetLength(1);
-
         float chessboardCenterX = (columns - 1) * size / 2f;
         float chessboardCenterY = (rows - 1) * size / 2f;
         Camera.main.transform.position = new Vector3(chessboardCenterX, chessboardCenterY, Camera.main.transform.position.z);
