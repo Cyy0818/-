@@ -6,7 +6,7 @@ namespace Path
 {
     public class PathFinding
     {
-        public static List<Node> FindPath(Node start, Node target, Node[,] nodes)
+        public static List<Node> FindPath(Node start, Node target, Node[,] nodes, float passWeight)
         {
             var toSearch = new List<Node> {start};
             var processed = new List<Node>();
@@ -47,7 +47,7 @@ namespace Path
                 if(current.Y-1 >= 0) current.Neighbors.Add(nodes[current.X,current.Y-1]);
                 if(current.Y+1 < nodes.GetLength(1)) current.Neighbors.Add(nodes[current.X,current.Y+1]);
                 
-                foreach (var neighbor in current.Neighbors.Where(n=>n.Type == E_Node_Type.Ground && !processed.Contains(n)))
+                foreach (var neighbor in current.Neighbors.Where(n=>n.Weight <= passWeight && !processed.Contains(n)))
                 {
                     var inSearch = toSearch.Contains(neighbor);
                     var costToNeighbor = current.G + current.GetDistance(neighbor);

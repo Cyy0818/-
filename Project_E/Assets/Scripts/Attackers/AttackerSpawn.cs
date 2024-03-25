@@ -15,7 +15,7 @@ public class AttackerSpawn : MonoBehaviour
         if (timer < 0 && attackerCounter != 0)
         {
             var curAttacker = Instantiate(attackers[0],transform.position, Quaternion.identity);
-            curAttacker.GetComponent<AttackerBase>()._path = nodeManager.FindPath();
+            //curAttacker.GetComponent<AttackerBase>()._path = nodeManager.FindPath();
             attackerCounter--;
             timer = 1f;
         }
