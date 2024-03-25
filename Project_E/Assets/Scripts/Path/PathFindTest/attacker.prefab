@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 1
   ATK: 1
-  Speed: 0.1
+  Speed: 0.0000001
 --- !u!135 &-8796396475255375064
 SphereCollider:
   m_ObjectHideFlags: 0
