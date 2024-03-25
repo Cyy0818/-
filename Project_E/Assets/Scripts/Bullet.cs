@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Attacker;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ public class Bullet : MonoBehaviour
         transform.LookAt(target.position);
         transform.Translate( Time.deltaTime * speed *Vector3.forward);
     }
-    //用Collider和RigidBody检测子弹是否击中敌人
+    //用触发器检测碰撞（加上collider和rigidbody）
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
