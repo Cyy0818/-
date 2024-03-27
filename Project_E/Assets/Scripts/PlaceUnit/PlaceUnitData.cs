@@ -13,7 +13,7 @@ public class PlaceUnitData
     public Slider HP;
     public Slider time;
 
-    [Header("PlaceUnit attack")]
+    [Header("PlaceUnit")]
     public GameObject PlaceUnitPrefab;
 
     [Header("Upgrade")] 

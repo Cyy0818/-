@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Attacker;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlaceUnit : MonoBehaviour {
-
+    
     private List<GameObject> Attackers = new List<GameObject>();
     void OnTriggerEnter(Collider col)
     {
@@ -72,7 +71,6 @@ public class PlaceUnit : MonoBehaviour {
                 emptyIndex.Add(index);
             }
         }
-
         for (int i = 0; i < emptyIndex.Count; i++)
         {
             Attackers.RemoveAt(emptyIndex[i]-i);
