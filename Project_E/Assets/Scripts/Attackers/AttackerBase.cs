@@ -47,8 +47,9 @@ namespace Attacker
             if (distance > arrivalRange)
             {
                 var direction = (targetPosition - transform.position).normalized;
-                var movement = direction * (Speed * 0.00001f * Time.fixedDeltaTime);
-                _rb.MovePosition(targetPosition + movement);
+                var movement = direction * Speed;
+                //_rb.MovePosition(targetPosition + movement);
+                _rb.velocity = movement;
             }
             else
             {

@@ -88,7 +88,7 @@ public class NodeManager : MonoBehaviour
 
                 int matrixValue = matrix[row, col];
                 var position = new Vector3(xPos, yPos, 0);
-                GameObject block = new();
+                var block = ground;
                 /*
                  * 0-起点
                  * -1-终点
