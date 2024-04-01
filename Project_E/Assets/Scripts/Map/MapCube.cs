@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Vector3 = System.Numerics.Vector3;
 
 public class MapCube : MonoBehaviour {
     [HideInInspector]
@@ -24,7 +25,7 @@ public class MapCube : MonoBehaviour {
     {
         this.PlaceUnitData = PlaceUnitData;
         isUpgraded = false;
-        PlaceUnitGo = GameObject.Instantiate(PlaceUnitData.PlaceUnitPrefab, transform.position, Quaternion.identity);
+        PlaceUnitGo = GameObject.Instantiate(PlaceUnitData.PlaceUnitPrefab, transform.position+new UnityEngine.Vector3(0,1,0), Quaternion.identity);
         GameObject effect = GameObject.Instantiate(buildEffect, transform.position, Quaternion.identity);
         Destroy(effect, 1.5f);
     }
