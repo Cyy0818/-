@@ -1,41 +1,49 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using Attacker;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
-{
-    public int damage;
-    public float speed;
+public class Bullet : MonoBehaviour {
+
+    public int damage = 50;
+
+    public float speed = 20;
+
+    public GameObject explosionEffectPrefab;
+
+    private float distanceArriveTarget = 1.2f;
+
     private Transform target;
-    public GameObject ExplosionEffectPrefab;
 
     public void SetTarget(Transform _target)
     {
         this.target = _target;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.LookAt(target.position);
-        transform.Translate( Time.deltaTime * speed *Vector3.forward);
-    }
-    //用触发器检测碰撞（加上collider和rigidbody）
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Enemy")
+        if (target == null)
         {
-            other.GetComponent<AttackerBase>().TakeDamage(damage);
-            GameObject.Instantiate(ExplosionEffectPrefab, transform.position, transform.rotation);
-            Destroy(this.gameObject);
+            Die();
+            return;
+        }
+
+        transform.LookAt(target.position);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+        Vector3 dir = target.position - transform.position;
+        if (dir.magnitude < distanceArriveTarget)
+        {
+            target.GetComponent<AttackerBase>().TakeDamage(damage);
+            Die();   
         }
     }
+
+    void Die()
+    {
+        GameObject effect = GameObject.Instantiate(explosionEffectPrefab, transform.position, transform.rotation);
+        Destroy(effect, 1);
+        Destroy(this.gameObject);
+    }
+
 }
