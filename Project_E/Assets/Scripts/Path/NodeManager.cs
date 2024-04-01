@@ -75,7 +75,6 @@ public class NodeManager : MonoBehaviour
     
     private void GenerateMap(int[,] matrix)
     {
-
         int rows = matrix.GetLength(0);
         int columns = matrix.GetLength(1);
 
@@ -84,10 +83,11 @@ public class NodeManager : MonoBehaviour
             for (int col = 0; col < columns; col++)
             {
                 float xPos = col * size;
-                float yPos = row * size;
+                float yPos = 0; // 设置为 0，因为我们在 XZ 平面上搭建地图
+                float zPos = row * size;
 
                 int matrixValue = matrix[row, col];
-                var position = new Vector3(xPos, yPos, 0);
+                var position = new Vector3(xPos, yPos, zPos);
                 var block = ground;
                 /*
                  * 0-起点
@@ -111,7 +111,7 @@ public class NodeManager : MonoBehaviour
                 {
                     block = end;
                 }
-                //添加Node组件，设定起点终点
+                // 添加Node组件，设定起点终点
                 block = Instantiate(block, position, Quaternion.identity, transform);
                 var node = SetNode(block, col, row, matrixValue);
                 if (matrixValue == 0)
@@ -125,15 +125,27 @@ public class NodeManager : MonoBehaviour
             }
         }
     }
+
     
     void MoveCamera2MapCenter(int[,] matrix)
     {
         int rows = matrix.GetLength(0);
         int columns = matrix.GetLength(1);
-
+        
+        // 计算棋盘中心位置
         float chessboardCenterX = (columns - 1) * size / 2f;
-        float chessboardCenterY = (rows - 1) * size / 2f;
+        float chessboardCenterZ = (rows - 1) * size / 2f;
+
+        // 设置摄像机的位置为棋盘斜上方 45 度的位置
+        float cameraHeight = 10f; // 设置摄像机的高度
+        float cameraDistance = 10f; // 设置摄像机与棋盘中心的距离
+        Camera.main.transform.position = new Vector3(chessboardCenterX, cameraHeight, chessboardCenterZ - cameraDistance);
+
+        // 设置摄像机的旋转角度
+        float cameraRotationX = 45f; // 摄像机绕X轴旋转的角度
+        Camera.main.transform.rotation = Quaternion.Euler(cameraRotationX, 0, 0);
     }
+
 
 
     private Node SetNode(GameObject block,int x, int y,float weight)
