@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &6308481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +212,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6308480}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.003, y: 0.003, z: 0.1}
   m_ConstrainProportionsScale: 0
@@ -221,7 +221,7 @@ RectTransform:
   - {fileID: 1017769452}
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 8.0944, y: 26.5613}
@@ -1269,7 +1269,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30205ed6da27f6044860952e1682b3fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waves: []
+  waves:
+  - enemyPrefab: {fileID: 7327750328470217810, guid: 9944b0da4599d0340957e3df2763e51c, type: 3}
+    count: 2
+    rate: 0
   startPoint: {fileID: 9080789673102610180, guid: 10ad6c4b9aba4744286c2741b4ba9cda, type: 3}
   waveRate: 1
 --- !u!1 &456193061
@@ -2811,7 +2814,7 @@ Skybox:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143816091}
   m_Enabled: 1
-  m_CustomSkybox: {fileID: 2100000, guid: 1cf6f4c6e6e0518419839d3f5448dd99, type: 2}
+  m_CustomSkybox: {fileID: 2100000, guid: 2bd8959f5fbd3644aa33af1a155fc147, type: 2}
 --- !u!1 &1265676354
 GameObject:
   m_ObjectHideFlags: 0
@@ -3554,7 +3557,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1910579160}
+        m_TargetAssemblyTypeName: PlaceManager, Assembly-CSharp
+        m_MethodName: OnRedSelected
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &1829361082
 GameObject:
@@ -3750,9 +3765,9 @@ MonoBehaviour:
     costUpgraded: 0
     attackRangeIndicatorPrefab: {fileID: 0}
   RedUnit:
-    level: 0
-    cost: 0
-    HPMax: 0
+    level: 1
+    cost: 2
+    HPMax: 1
     HP: {fileID: 0}
     time: {fileID: 0}
     PlaceUnitPrefab: {fileID: 7846143556727740522, guid: b448c821a310bfd4c81239cabf71d363, type: 3}

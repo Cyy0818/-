@@ -18,6 +18,7 @@ public class WaveManager : MonoBehaviour
     public void EnemyGenerate()
     {
         StartCoroutine(SpawnEnemies());
+      
     }
 
     public void Init(Transform startTransform, Node start, Node target, Node[,] mapNodes)
@@ -32,6 +33,7 @@ public class WaveManager : MonoBehaviour
     {
         foreach (var wave in waves)
         {
+            Debug.Log("1111");
             for (int i = 0; i < wave.count; i++)
             {
                 EnemiesAliveCounter++;

@@ -137,12 +137,12 @@ public class NodeManager : MonoBehaviour
         float chessboardCenterZ = (rows - 1) * size / 2f;
 
         // 设置摄像机的位置为棋盘斜上方 45 度的位置
-        float cameraHeight = 10f; // 设置摄像机的高度
+        float cameraHeight = 7f; // 设置摄像机的高度
         float cameraDistance = 10f; // 设置摄像机与棋盘中心的距离
-        Camera.main.transform.position = new Vector3(chessboardCenterX, cameraHeight, chessboardCenterZ - cameraDistance);
+        Camera.main.transform.position = new Vector3(chessboardCenterX, cameraHeight, 0.5f);
 
         // 设置摄像机的旋转角度
-        float cameraRotationX = 45f; // 摄像机绕X轴旋转的角度
+        float cameraRotationX = 70f;// 摄像机绕X轴旋转的角度
         Camera.main.transform.rotation = Quaternion.Euler(cameraRotationX, 0, 0);
     }
 
