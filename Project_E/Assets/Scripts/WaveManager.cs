@@ -31,13 +31,15 @@ public class WaveManager : MonoBehaviour
     
     private IEnumerator SpawnEnemies()
     {
+        var startPos = startPoint.position;
+        var spawnPosition = new Vector3(startPos.x, startPos.y + 1, startPos.z);
         foreach (var wave in waves)
         {
-            Debug.Log("1111");
+            //Debug.Log("1111");
             for (int i = 0; i < wave.count; i++)
             {
                 EnemiesAliveCounter++;
-                var enemy =  Instantiate(wave.enemyPrefab, startPoint.position, Quaternion.identity);
+                var enemy =  Instantiate(wave.enemyPrefab, spawnPosition, Quaternion.identity);
                 enemy.GetComponent<AttackerBase>().SetNode(_startNode, _targetNode, _mapNodes);
                 if (i != wave.count-1)
                     yield return new WaitForSeconds(wave.rate);

@@ -1272,8 +1272,8 @@ MonoBehaviour:
   waves:
   - enemyPrefab: {fileID: 7327750328470217810, guid: 9944b0da4599d0340957e3df2763e51c, type: 3}
     count: 2
-    rate: 0
-  startPoint: {fileID: 9080789673102610180, guid: 10ad6c4b9aba4744286c2741b4ba9cda, type: 3}
+    rate: 10
+  startPoint: {fileID: 0}
   waveRate: 1
 --- !u!1 &456193061
 GameObject:
@@ -2714,7 +2714,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080457816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.37578195, y: -4.47356, z: 0.029013004}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3223,7 +3223,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524054192}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.37578195, y: 4.47356, z: -0.029013004}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

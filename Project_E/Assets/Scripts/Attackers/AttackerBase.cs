@@ -40,10 +40,11 @@ namespace Attacker
 
         private void MovePosition()
         {
-            var targetPosition = new Vector3(path[_curNode].transform.position.x, path[_curNode].transform.position.y, -1);
-            //Debug.Log("AttackerPostionX:" + transform.position.x + "AttackerPostionY:" + transform.position.y);
-            //Debug.Log("TargetPositionX: " + _path[_curNode].transform.position.x + "TargetPositionY: " + _path[_curNode].transform.position.y);
+            var targetPosition = new Vector3(path[_curNode].transform.position.x, path[_curNode].transform.position.y + 1, 3);
+            //Debug.Log("AttackerPostionX:" + transform.position.x + "AttackerPostionY:" + transform.position.y + "AttackerPostionZ:" + transform.position.z);
+            //Debug.Log("TargetPositionX: " + targetPosition.x + "TargetPositionY: " + targetPosition.y + "TargetPositionZ: " + targetPosition.z);
             var distance = Vector3.Distance(transform.position, targetPosition);
+            //Debug.Log("Distance:" + distance);
             if (distance > arrivalRange)
             {
                 var direction = (targetPosition - transform.position).normalized;
