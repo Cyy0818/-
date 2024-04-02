@@ -61,6 +61,7 @@ namespace Attacker
                 else
                 {
                     _rb.velocity = Vector3.zero;
+                    ReachDestination();
                 }
             }
         }
