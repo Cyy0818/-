@@ -71,6 +71,10 @@ namespace Attacker
             _targetNode = target;
             _mapNodes = mapNodes;
         }
+        void ReachDestination()
+        {
+            GameObject.Destroy(this.gameObject);
+        }
         public void FindPath()
         {
             _startNode = path[_curNode];
