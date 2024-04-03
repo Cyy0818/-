@@ -152,7 +152,7 @@ public class PlaceManager : MonoBehaviour
             selectedPlaceUnitData = Bomb;
         }
     }
-    /*IEnumerator SlowDownTimeAndMoveCamera()
+    IEnumerator SlowDownTimeAndMoveCamera()
     {
         float originalTimeScale = Time.timeScale;
         Time.timeScale = 0.5f; // 将时间缩放为原来的一半，即减慢游戏速度
@@ -161,7 +161,7 @@ public class PlaceManager : MonoBehaviour
         Vector3 originalCameraPosition = Camera.main.transform.position;
         Quaternion originalCameraRotation = Camera.main.transform.rotation;
 
-        Vector3 targetCameraPosition = originalCameraPosition - new Vector3(3f, 0f, 0f); // 向右移动摄像机
+        Vector3 targetCameraPosition = originalCameraPosition - new Vector3(1f, -2f, 6f); // 向右移动摄像机
         Quaternion targetCameraRotation = Quaternion.Euler(45f, Mathf.Clamp(Camera.main.transform.rotation.eulerAngles.y + 5f, 0f, 5f), 0f); // 限制摄像机的旋转角度
 
         float duration = 0.5f; // 过渡时间
@@ -179,26 +179,25 @@ public class PlaceManager : MonoBehaviour
         Camera.main.transform.rotation = targetCameraRotation;
 
         yield return null;
-    }*/
+    }
 
     void ShowUpgradeUI(Vector3 pos, bool isDisableUpgrade=false)
     {
         StopCoroutine("HideUpgradeUI");
-        /*StartCoroutine("SlowDownTimeAndMoveCamera"); // 开始减慢游戏时间和移动摄像机*/
+        StartCoroutine("SlowDownTimeAndMoveCamera"); // 开始减慢游戏时间和移动摄像机
         upgradeCanvas.SetActive(false);
         upgradeCanvas.SetActive(true);
         upgradeCanvas.transform.position = pos;
         buttonUpgrade.interactable = !isDisableUpgrade;
     }
     
-    /*
     IEnumerator RestoreOriginalCameraState()
     {
         Vector3 originalCameraPosition = Camera.main.transform.position;
         Quaternion originalCameraRotation = Camera.main.transform.rotation;
 
-        Vector3 targetCameraPosition = originalCameraPosition + new Vector3(3f, 0f, 0f); // 向右移动摄像机
-        Quaternion targetCameraRotation = Quaternion.Euler(45f, Mathf.Clamp(Camera.main.transform.rotation.eulerAngles.y - 5f, 0f, 5f), 0f); // 限制摄像机的旋转角度
+        Vector3 targetCameraPosition = originalCameraPosition + new Vector3(1f, -2f, 6f); // 向右移动摄像机
+        Quaternion targetCameraRotation = Quaternion.Euler(70f, Mathf.Clamp(Camera.main.transform.rotation.eulerAngles.y - 5f, 0f, 5f), 0f); // 限制摄像机的旋转角度
 
         float duration = 0.5f; // 过渡时间
 
@@ -216,15 +215,14 @@ public class PlaceManager : MonoBehaviour
 
         yield return null;
     }
-    */
 
 
     IEnumerator HideUpgradeUI()
     {
         upgradeCanvasAnimator.SetTrigger("Hide");
         yield return new WaitForSeconds(0.8f);
-        /*StartCoroutine("RestoreOriginalCameraState");
-        Time.timeScale = 1f; // 恢复游戏时间正常*/
+        StartCoroutine("RestoreOriginalCameraState");
+        Time.timeScale = 1f; // 恢复游戏时间正常
         upgradeCanvas.SetActive(false);
     }
 
