@@ -1,21 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public int playerHp;
-
+    public Slider playerHpSlider;
+    public int attackerReachDestinationDamage;
     public int maxReachEndAttacker;
+    private int playerTempHp;
+
+    private void Awake()
+    {
+        playerTempHp = playerHp;
+    }
 
     void Defeated()
     {
-        if (playerHp==0){
+        if (playerTempHp==0){
             Debug.Log("defeated");
         }
     }
 
+    public void takeDamage()
+    {
+        playerTempHp -= attackerReachDestinationDamage;
+        playerHpSlider.value = (float)playerTempHp / playerHp;
+        
+    }
     void Win()
     {
         if (gameObject.GetComponent<AttackerSpawn>().attackerCounter==0)
