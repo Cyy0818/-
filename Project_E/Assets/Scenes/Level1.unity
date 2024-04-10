@@ -1272,16 +1272,13 @@ MonoBehaviour:
   waves:
   - enemyPrefab: {fileID: 7327750328470217810, guid: 9944b0da4599d0340957e3df2763e51c, type: 3}
     count: 3
-    rate: 6
+    rate: 5
   - enemyPrefab: {fileID: 7327750328470217810, guid: 9944b0da4599d0340957e3df2763e51c, type: 3}
-    count: 2
-    rate: 10
+    count: 7
+    rate: 2
   - enemyPrefab: {fileID: 7327750328470217810, guid: 9944b0da4599d0340957e3df2763e51c, type: 3}
-    count: 2
-    rate: 10
-  - enemyPrefab: {fileID: 7327750328470217810, guid: 9944b0da4599d0340957e3df2763e51c, type: 3}
-    count: 2
-    rate: 10
+    count: 4
+    rate: 1
   startPoint: {fileID: 0}
   waveRate: 1
 --- !u!1 &456193061

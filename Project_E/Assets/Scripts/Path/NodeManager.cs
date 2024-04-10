@@ -22,7 +22,7 @@ public class NodeManager : MonoBehaviour
     [Header("WaveManager")] 
     public WaveManager waveManager;
 
-    private void Start()
+    public void GenerateNodes()
     {
         _matrix = ReadMatrixFormFile(matrixFilePath);
         //行反转
@@ -30,12 +30,8 @@ public class NodeManager : MonoBehaviour
         _mapNodes = new Node[_matrix.GetLength(1),_matrix.GetLength(0)];
         GenerateMap(_matrix);
         MoveCamera2MapCenter(_matrix);
-        
-        //开始生成敌人
-        StartAttackerGenerate();
     }
-
-    #region MapGenerator
+    
 
     private int[,] ReadMatrixFormFile(string filePath)
     {
@@ -157,18 +153,19 @@ public class NodeManager : MonoBehaviour
         _mapNodes[x, y] = node;
         return node;
     }
-    
-    #endregion
 
-    #region Start
-
-    private void StartAttackerGenerate()
+    public Node GetStartNode()
     {
-        var startPosition = _startNode.transform;
-        waveManager.Init(startPosition,_startNode,_targetNode,_mapNodes);
-        waveManager.EnemyGenerate();
+        return _startNode;
     }
 
-    #endregion
-    
+    public Node GetTargetNode()
+    {
+        return _targetNode;
+    }
+
+    public Node[,] GetMapNodes()
+    {
+        return _mapNodes;
+    }
 }

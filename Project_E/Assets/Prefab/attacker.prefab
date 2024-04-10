@@ -114,9 +114,11 @@ MonoBehaviour:
   passWeight: 1
   path: []
   arrivalRange: 0.5
-  Health: 1
-  ATK: 1
-  Speed: 1
+  health: 50
+  attack: 5
+  attackSpeed: 4
+  speed: 1
+  finialAttack: 1
 --- !u!54 &1983369501698812740
 Rigidbody:
   m_ObjectHideFlags: 0

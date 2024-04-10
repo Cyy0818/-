@@ -6,8 +6,10 @@ namespace Attacker
     public class AttackerBase : MonoBehaviour 
     {
         private Rigidbody _rb;
-        private int _curNode = 0;//当前节点
+        [SerializeField] [Header("管理器")] private WaveManager _waveManager;
         [Header("寻路")] 
+        //应该记录自身所在的节点位置
+        private int _curNode = 0;//当前节点
         private Node _startNode;
         private Node _targetNode;
         private Node[,] _mapNodes;
@@ -15,19 +17,22 @@ namespace Attacker
         public List<Node> path;
         public float arrivalRange = 0.3f;//检测范围阈值
         [Header("属性面板")]
-        public float Health;
-        public float ATK;
-        public float Speed;
+        public float health;
+        public float attack;
+        public float attackSpeed;
+        public float speed;
+        public float finialAttack;//对终点的伤害
 
         private void Start()
         {
             _rb = GetComponent<Rigidbody>();
+            _waveManager = GetComponentInParent<WaveManager>();
             path = PathFinding.FindPath(_startNode, _targetNode, _mapNodes, passWeight);
         }
 
         private void Update()
         {
-            if (Health <= 0)
+            if (health <= 0)
             {
                 Dead();
             }
@@ -48,7 +53,7 @@ namespace Attacker
             if (distance > arrivalRange)
             {
                 var direction = (targetPosition - transform.position).normalized;
-                var movement = direction * Speed;
+                var movement = direction * speed;
                 //_rb.MovePosition(targetPosition + movement);
                 _rb.velocity = movement;
             }
@@ -60,6 +65,7 @@ namespace Attacker
                 }
                 else
                 {
+                    //到达终点
                     _rb.velocity = Vector3.zero;
                     ReachDestination();
                 }
@@ -74,7 +80,8 @@ namespace Attacker
         }
         void ReachDestination()
         {
-            GameObject.Destroy(this.gameObject);
+            //GameObject.Destroy(this.gameObject);
+            Dead();
         }
         public void FindPath()
         {
@@ -83,7 +90,7 @@ namespace Attacker
         }
         public void TakeDamage(float attack)
         {
-            Health -= attack;
+            health -= attack;
         }
 
         private void OnDestroy()
@@ -93,7 +100,9 @@ namespace Attacker
 
         private void Dead()
         {
-            GameObject.Destroy(this.gameObject);
+            //GameObject.Destroy(this.gameObject);
+            _waveManager._objectPool.PushObject(gameObject);
+            _waveManager.totalAttackerCounter--;
         }
       
     }
