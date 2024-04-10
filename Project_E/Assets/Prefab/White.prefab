@@ -130,7 +130,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRateTime: 1
   bulletPrefab: {fileID: 6827892300552999609, guid: bc6ca981c6f1ff042be73de542a28853, type: 3}
+  explosionEffectPrefab: {fileID: 919132149155446097, guid: 4338858bca4514f45a0f9a251261035e, type: 3}
   damageRate: 70
+  isBomb: 1
+  explosionDamage: 500
+  level: 0
+  hpMax: 0
+  timeSlider: {fileID: 0}
+  hpSlider: {fileID: 0}
 --- !u!1001 &8849923415174702978
 PrefabInstance:
   m_ObjectHideFlags: 0
