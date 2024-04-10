@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Attacker;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlaceUnit : MonoBehaviour {
 
@@ -9,7 +11,7 @@ public class PlaceUnit : MonoBehaviour {
     {
         if (col.tag == "Attacker")
         {
-            Debug.Log("YEs");
+            Debug.Log("Yes");
             attackers.Add(col.gameObject);
         }
     }
@@ -26,7 +28,21 @@ public class PlaceUnit : MonoBehaviour {
 
     public GameObject bulletPrefab;//子弹
 
+    public GameObject explosionEffectPrefab;
+    
     public float damageRate = 70;
+
+    public bool isBomb;
+
+    [Header("如果是炸弹，设置爆炸伤害")] 
+    public float explosionDamage;
+    
+    [Header("UI")] 
+    public int level;
+    public int hpMax;
+    public Slider timeSlider;
+    public Slider hpSlider;
+    
     
 
     void Start()
@@ -42,10 +58,18 @@ public class PlaceUnit : MonoBehaviour {
         }
        
         timer += Time.deltaTime;
+        /*timeSlider.value = (float)timer / damageRate;//攻击间隔显示*/
         if (attackers.Count > 0 && timer >= attackRateTime)
         {
             timer = 0;
-            Attack();
+            if (isBomb)
+            {
+                explosion();
+            }
+            else
+            {
+                Attack();
+            }
         }
     }
 
@@ -68,7 +92,6 @@ public class PlaceUnit : MonoBehaviour {
 
     void Updateattackers()
     {
-        //attackers.RemoveAll(null);
         List<int> emptyIndex = new List<int>();
         for (int index = 0; index < attackers.Count; index++)
         {
@@ -83,4 +106,20 @@ public class PlaceUnit : MonoBehaviour {
             attackers.RemoveAt(emptyIndex[i]-i);
         }
     }
+
+    void explosion()
+    {
+        if (attackers[0] == null)
+        {
+            Updateattackers();
+        }
+        else if (attackers.Count > 0)
+        {
+            GameObject explosionEffect = GameObject.Instantiate(explosionEffectPrefab, this.transform.position+new Vector3(0,1,0), this.transform.rotation);
+            attackers[0].GetComponent<AttackerBase>().TakeDamage(explosionDamage);
+            Destroy(this.gameObject);
+            Destroy(explosionEffect,1);
+        }
+    }
+    
 }
