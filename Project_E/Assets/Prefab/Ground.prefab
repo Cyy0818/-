@@ -112,14 +112,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlaceUnitGo: {fileID: 0}
   PlaceUnitData:
-    level: 0
     cost: 0
-    HPMax: 0
-    HP: {fileID: 0}
-    time: {fileID: 0}
     PlaceUnitPrefab: {fileID: 0}
     PlaceUnitUpGradePrefab: {fileID: 0}
     costUpgraded: 0
     attackRangeIndicatorPrefab: {fileID: 0}
   isUpgraded: 0
   buildEffect: {fileID: 1387575018745512, guid: b86f6c9b242c0dc4e838a2988dba6a43, type: 3}
+  nodeManager: {fileID: 7346067940241174582, guid: 533408e3fd63c994caaa14434fd62b60, type: 3}
