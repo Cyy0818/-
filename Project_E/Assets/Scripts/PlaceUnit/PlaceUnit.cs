@@ -11,7 +11,6 @@ public class PlaceUnit : MonoBehaviour {
     { 
         if (col.tag == "Attacker")
         {
-            Debug.Log("Yes");
             attackers.Add(col.gameObject);
         }
     }
@@ -34,8 +33,12 @@ public class PlaceUnit : MonoBehaviour {
 
     public bool isBomb;
 
-    [Header("如果是炸弹，设置爆炸伤害")] 
+    public bool isMine;
+    
+    [Header("如果是爆炸类的")] 
     public float explosionDamage;
+
+    public float explosionDamageRadius;
     
     [Header("UI")] 
     public int level;
@@ -52,24 +55,34 @@ public class PlaceUnit : MonoBehaviour {
 
     void Update()
     {
-        if (attackers.Count > 0 && attackers[0] != null)
+        Debug.Log("Attackers in list:");
+        foreach (var attacker in attackers)
         {
-            Vector3 targetPosition = attackers[0].transform.position;
+            Debug.Log(attacker.name);
         }
-       
+
         timer += Time.deltaTime;
-        /*timeSlider.value = (float)timer / damageRate;//攻击间隔显示*/
-        if (attackers.Count > 0 && timer >= attackRateTime)
+        timeSlider.value = (float)timer / damageRate;//攻击间隔显示
+        timeSlider.transform.position = this.transform.position;
+        if (timer >= attackRateTime)
         {
             timer = 0;
             if (isBomb)
             {
-                explosion();
+                Explosion();
+            }
+            else if (isMine)
+            {
+                if (attackers.Count > 0)
+                {
+                    Explosion();
+                }
             }
             else
             {
                 Attack();
             }
+            
         }
     }
 
@@ -106,20 +119,27 @@ public class PlaceUnit : MonoBehaviour {
             attackers.RemoveAt(emptyIndex[i]-i);
         }
     }
+    
 
-    void explosion()
+    void Explosion()
     {
-        if (attackers[0] == null)
+        GameObject explosionEffect = GameObject.Instantiate(explosionEffectPrefab, this.transform.position + new Vector3(0, 1, 0), this.transform.rotation);
+        
+        foreach(GameObject attacker in attackers)
         {
-            Updateattackers();
+            if(attacker.CompareTag("Attacker"))
+            {
+                // 对每个攻击者造成伤害
+                attacker.GetComponent<AttackerBase>().TakeDamage(explosionDamage);
+            }
         }
-        else if (attackers.Count > 0)
-        {
-            GameObject explosionEffect = GameObject.Instantiate(explosionEffectPrefab, this.transform.position+new Vector3(0,1,0), this.transform.rotation);
-            attackers[0].GetComponent<AttackerBase>().TakeDamage(explosionDamage);
-            Destroy(this.gameObject);
-            Destroy(explosionEffect,1);
-        }
+
+        // 销毁单位和爆炸特效
+        Destroy(this.gameObject);
+        Destroy(explosionEffect, 1);
     }
+
+
+    
     
 }

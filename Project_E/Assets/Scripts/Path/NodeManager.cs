@@ -16,7 +16,6 @@ public class NodeManager : MonoBehaviour
 
     [Header("矩阵路径")] 
     public string matrixFilePath;
-    private int[,] _matrix;
     
     [Header("节点信息")]
     private static Node _startNode;
@@ -125,29 +124,7 @@ public class NodeManager : MonoBehaviour
             }
         }
     }
-
     
-    void MoveCamera2MapCenter(int[,] matrix)
-    {
-        int rows = matrix.GetLength(0);
-        int columns = matrix.GetLength(1);
-        
-        // 计算棋盘中心位置
-        float chessboardCenterX = (columns - 1) * size / 2f;
-        float chessboardCenterZ = (rows - 1) * size / 2f;
-
-        // 设置摄像机的位置为棋盘斜上方 45 度的位置
-        float cameraHeight = 7f; // 设置摄像机的高度
-        float cameraDistance = 10f; // 设置摄像机与棋盘中心的距离
-        Camera.main.transform.position = new Vector3(chessboardCenterX, cameraHeight, 0.5f);
-
-        // 设置摄像机的旋转角度
-        float cameraRotationX = 70f;// 摄像机绕X轴旋转的角度
-        Camera.main.transform.rotation = Quaternion.Euler(cameraRotationX, 0, 0);
-    }
-
-
-
     private Node SetNode(GameObject block,int x, int y,float weight)
     {
         var node = block.AddComponent<Node>();
@@ -249,4 +226,21 @@ public static void Reduce(int x, int y, float weightNode, int radius,float weigh
 
     #endregion
 
+    // 打印地图的权重矩阵
+    public void PrintMatrix()
+    {
+        Debug.Log("Map Matrix:");
+        int rows = _matrix.GetLength(0);
+        int columns = _matrix.GetLength(1);
+
+        for (int row = 0; row < rows; row++)
+        {
+            string rowString = "";
+            for (int col = 0; col < columns; col++)
+            {
+                rowString += _matrix[row, col] + " ";
+            }
+            Debug.Log(rowString);
+        }
+    }
 }

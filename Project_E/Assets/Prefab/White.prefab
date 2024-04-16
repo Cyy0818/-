@@ -114,7 +114,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 1, z: 3}
+  m_Size: {x: 5, y: 1, z: 5}
   m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!114 &5715406496490045889
 MonoBehaviour:
@@ -130,13 +130,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRateTime: 1
   bulletPrefab: {fileID: 6827892300552999609, guid: bc6ca981c6f1ff042be73de542a28853, type: 3}
-  explosionEffectPrefab: {fileID: 919132149155446097, guid: 4338858bca4514f45a0f9a251261035e, type: 3}
-  damageRate: 70
-  isBomb: 1
+  explosionEffectPrefab: {fileID: 1837583411409002, guid: 8d54c1b9f92db964490ef2376d871c1d, type: 3}
+  damageRate: 1000
+  isBomb: 0
+  isMine: 1
   explosionDamage: 500
+  explosionDamageRadius: 1
   level: 0
   hpMax: 0
-  timeSlider: {fileID: 0}
+  timeSlider: {fileID: 6682159333598347007, guid: 1d2be1b90557f8b40a5e1c7499d58f19, type: 3}
   hpSlider: {fileID: 0}
 --- !u!1001 &8849923415174702978
 PrefabInstance:
