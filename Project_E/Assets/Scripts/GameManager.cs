@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     }
     void Win()
     {
-        if (_waveManager.totalAttackerCounter == 0)
+        if (WaveManager.TotalAttackerCounter == 0)
         {
             Debug.Log("win");
         }
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     
     private void StartAttackerGenerate()
     {
-        _waveManager.Init(_nodeManager.GetStartNode(),_nodeManager.GetTargetNode(),_nodeManager.GetMapNodes());
+        _waveManager.SetStartPosition(_nodeManager.GetStartNode().transform.position);
         _waveManager.EnemyGenerate();
     }
     // Start is called before the first frame update
@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         _nodeManager = gameObject.GetComponentInChildren<NodeManager>();
         //创建地图，生成节点
         _nodeManager.GenerateNodes();
+        _nodeManager.InitPath();
         //开始生成敌人
         StartAttackerGenerate();
     }

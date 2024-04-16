@@ -8,7 +8,7 @@ public class PlaceUnit : MonoBehaviour {
 
     private List<GameObject> attackers = new List<GameObject>();
     void OnTriggerEnter(Collider col)
-    {
+    { 
         if (col.tag == "Attacker")
         {
             Debug.Log("Yes");

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.75420606, g: 0.67674315, b: 0.81094205, a: 1}
+  m_IndirectSpecularColor: {r: 0.75392586, g: 0.6765448, b: 0.8103931, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2388,7 +2388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9119914067696570634, guid: 2419c36783cdf6e45b3e7da31e809f4e, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9119914067696570634, guid: 2419c36783cdf6e45b3e7da31e809f4e, type: 3}
       propertyPath: m_LocalScale.x
@@ -10707,7 +10707,7 @@ Transform:
   - {fileID: 277225489}
   - {fileID: 589146952}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1001 &1121910449
 PrefabInstance:
@@ -11536,7 +11536,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ef9f8ea8ffd429840a86ea143a5113bd, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ef9f8ea8ffd429840a86ea143a5113bd, type: 3}
       propertyPath: m_LocalScale.x
@@ -12213,7 +12213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4301037414082005081, guid: c9c1f8e55f2cb8541a1f2fa307c455bd, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4301037414082005081, guid: c9c1f8e55f2cb8541a1f2fa307c455bd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13132,71 +13132,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WhiteUnit:
-    level: 1
     cost: 1
-    HPMax: 1
-    HP: {fileID: 0}
-    time: {fileID: 0}
     PlaceUnitPrefab: {fileID: 2231899558990557343, guid: b3ad3f2121bf3ff4e851dea37cd13e26, type: 3}
     PlaceUnitUpGradePrefab: {fileID: 0}
     costUpgraded: 0
     attackRangeIndicatorPrefab: {fileID: 0}
   RedUnit:
-    level: 1
     cost: 2
-    HPMax: 1
-    HP: {fileID: 0}
-    time: {fileID: 0}
     PlaceUnitPrefab: {fileID: 7846143556727740522, guid: b448c821a310bfd4c81239cabf71d363, type: 3}
     PlaceUnitUpGradePrefab: {fileID: 0}
     costUpgraded: 0
     attackRangeIndicatorPrefab: {fileID: 0}
   BlueUnit:
-    level: 0
     cost: 0
-    HPMax: 0
-    HP: {fileID: 0}
-    time: {fileID: 0}
     PlaceUnitPrefab: {fileID: 7846143556727740522, guid: 1c191cb6589a66f4fb58dcc4dd5aab6e, type: 3}
     PlaceUnitUpGradePrefab: {fileID: 0}
     costUpgraded: 0
     attackRangeIndicatorPrefab: {fileID: 0}
   ResourceUnit:
-    level: 0
     cost: 0
-    HPMax: 0
-    HP: {fileID: 0}
-    time: {fileID: 0}
     PlaceUnitPrefab: {fileID: 0}
     PlaceUnitUpGradePrefab: {fileID: 0}
     costUpgraded: 0
     attackRangeIndicatorPrefab: {fileID: 0}
   PlacedWall:
-    level: 0
     cost: 0
-    HPMax: 0
-    HP: {fileID: 0}
-    time: {fileID: 0}
     PlaceUnitPrefab: {fileID: 0}
     PlaceUnitUpGradePrefab: {fileID: 0}
     costUpgraded: 0
     attackRangeIndicatorPrefab: {fileID: 0}
   LandMine:
-    level: 0
     cost: 0
-    HPMax: 0
-    HP: {fileID: 0}
-    time: {fileID: 0}
     PlaceUnitPrefab: {fileID: 0}
     PlaceUnitUpGradePrefab: {fileID: 0}
     costUpgraded: 0
     attackRangeIndicatorPrefab: {fileID: 0}
   Bomb:
-    level: 0
     cost: 0
-    HPMax: 0
-    HP: {fileID: 0}
-    time: {fileID: 0}
     PlaceUnitPrefab: {fileID: 0}
     PlaceUnitUpGradePrefab: {fileID: 0}
     costUpgraded: 0
@@ -16826,18 +16798,15 @@ MonoBehaviour:
   waves:
   - enemyPrefab: {fileID: 7327750328470217810, guid: 9944b0da4599d0340957e3df2763e51c, type: 3}
     count: 3
-    rate: 6
+    rate: 5
   - enemyPrefab: {fileID: 7327750328470217810, guid: 9944b0da4599d0340957e3df2763e51c, type: 3}
-    count: 2
-    rate: 10
+    count: 7
+    rate: 2
   - enemyPrefab: {fileID: 7327750328470217810, guid: 9944b0da4599d0340957e3df2763e51c, type: 3}
-    count: 2
-    rate: 10
-  - enemyPrefab: {fileID: 7327750328470217810, guid: 9944b0da4599d0340957e3df2763e51c, type: 3}
-    count: 2
-    rate: 10
-  startPoint: {fileID: 0}
+    count: 4
+    rate: 1
   waveRate: 1
+  totalAttackerCounter: 0
 --- !u!1001 &1852534231
 PrefabInstance:
   m_ObjectHideFlags: 0

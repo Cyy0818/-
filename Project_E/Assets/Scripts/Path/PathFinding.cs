@@ -7,17 +7,21 @@ namespace Path
 {
     public class PathFinding
     {
-        public static List<Node> FindPath(Node start, Node target, Node[,] nodes, float passWeight)
+        public static List<Node> FindPath(Node start, Node target, Node[,] nodes )
         {
+            //清楚邻居节点
+            ClearNodes(nodes);
             var toSearch = new List<Node> {start};
             var processed = new List<Node>();
+            
+            //
     
             while (toSearch.Any())//当toSearch为空时，没有道路
             {
                 var current = toSearch[0];
                 foreach (var tNode in toSearch)
                 {
-                    if (tNode.F < current.F || tNode.F == current.F && tNode.F < current.F)
+                    if (tNode.F < current.F || tNode.F == current.F && tNode.H < current.H)
                     {
                         current = tNode;
                     }
@@ -26,6 +30,7 @@ namespace Path
                 processed.Add(current);
                 toSearch.Remove(current);
     
+                //找到
                 if (current == target)
                 {
                     var curPathNode = target;
@@ -48,19 +53,19 @@ namespace Path
                 if(current.Y-1 >= 0) current.Neighbors.Add(nodes[current.X,current.Y-1]);
                 if(current.Y+1 < nodes.GetLength(1)) current.Neighbors.Add(nodes[current.X,current.Y+1]);
                 
-                foreach (var neighbor in current.Neighbors.Where(n=>n.Weight <= passWeight && !processed.Contains(n)))
+                foreach (var neighbor in current.Neighbors.Where(n => !processed.Contains(n)))
                 {
                     var inSearch = toSearch.Contains(neighbor);
-                    var costToNeighbor = current.G + current.GetDistance(neighbor);
+                    var costToNeighbor = current.G + current.GetManhattanDistance(neighbor) * neighbor.Weight;
                     if (!inSearch || costToNeighbor < neighbor.G)
                     {
                         neighbor.SetG((int)costToNeighbor);
                         neighbor.SetConnnetion(current);
                         if (!inSearch)
                         {
-                            neighbor.SetH((int)neighbor.GetDistance(target));
+                            neighbor.SetH(neighbor.GetDistance(target)) ;
                             toSearch.Add(neighbor);
-                        }
+                        } 
                     }
                 }
             }
@@ -73,6 +78,14 @@ namespace Path
             foreach (var node in path)
             {
                 Debug.Log("X: " + node.X + "Y: " + node.Y);
+            }
+        }
+
+        public static void ClearNodes(Node[,] nodes)
+        {
+            foreach (var node in nodes)
+            {
+                node.Neighbors?.Clear();
             }
         }
     }

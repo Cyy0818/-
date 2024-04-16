@@ -1,6 +1,10 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Path;
+using static Path.PathFinding;
+
 public class NodeManager : MonoBehaviour
 {
     [Header("场景Prefab")] 
@@ -15,14 +19,14 @@ public class NodeManager : MonoBehaviour
     private int[,] _matrix;
     
     [Header("节点信息")]
-    private Node _startNode;
-    private Node _targetNode;
-    private Node[,] _mapNodes;
+    private static Node _startNode;
+    private static Node _targetNode;
+    private static Node[,] _mapNodes;
+    public static List<Node> _path;
 
-    [Header("WaveManager")] 
-    public WaveManager waveManager;
+    #region 地图生成和基本信息
 
-    public void GenerateNodes()
+        public void GenerateNodes()
     {
         _matrix = ReadMatrixFormFile(matrixFilePath);
         //行反转
@@ -149,7 +153,7 @@ public class NodeManager : MonoBehaviour
         var node = block.AddComponent<Node>();
         node.X = x;
         node.Y = y;
-        node.Weight = weight;
+        node.Weight = weight <= 0 ? 0 : weight;
         _mapNodes[x, y] = node;
         return node;
     }
@@ -168,4 +172,81 @@ public class NodeManager : MonoBehaviour
     {
         return _mapNodes;
     }
+
+    #endregion
+
+    #region 寻路管理
+
+    public static event Action<List<Node>> PathUpdate; 
+    public void InitPath()
+    {
+        _path = FindPath(_startNode, _targetNode, _mapNodes);
+    }
+    
+    /// <summary>
+    /// 当权重发生改变时，修改路径
+    /// </summary>
+    private static void TransmitPath()
+    {
+        //将修改后的地图矩阵重新进行寻路，再使用PathUpdate广播给所有活着的敌人
+        _path = FindPath(_startNode, _targetNode, _mapNodes);
+        PathUpdate?.Invoke(_path);
+    }
+    
+    #endregion
+
+    #region 权重管理
+    
+/// <summary>
+/// 增加塔以及攻击范围的权重
+/// </summary>
+/// <param name="x">Node的x</param>
+/// <param name="y">Node的y</param>
+/// <param name="weightNode">塔的权重</param>
+/// <param name="radius">攻击范围半径</param>
+/// <param name="weightRadius">攻击范围权重修改</param>
+    public static void Increase(int x, int y, float weightNode, int radius,float weightRadius)
+    {
+        _mapNodes[x,y].IncreaseWeight(weightNode);
+        for (var i = x - radius; i <= x + radius; i++)
+        {
+            for (var j = y - radius; j <= y + radius; j++)
+            {
+                if (i >= 0 && i < _mapNodes.GetLength(0)
+                           && j >= 0 && j < _mapNodes.GetLength(1))
+                {
+                    _mapNodes[i, j].IncreaseWeight(weightRadius);
+                }
+            }
+        }
+        TransmitPath();
+    }
+
+/// <summary>
+/// 减少塔以及攻击范围的权重
+/// </summary>
+/// <param name="x">Node的x</param>
+/// <param name="y">Node的y</param>
+/// <param name="weightNode">塔的权重</param>
+/// <param name="radius">攻击范围半径</param>
+/// <param name="weightRadius">攻击范围权重修改</param>
+public static void Reduce(int x, int y, float weightNode, int radius,float weightRadius)
+{
+    _mapNodes[x,y].ReduceWeight(weightNode);
+    for (var i = x - radius; i <= x + radius; i++)
+    {
+        for (var j = y - radius; j <= y + radius; j++)
+        {
+            if (i >= 0 && i < _mapNodes.GetLength(0)
+                       && j >= 0 && j < _mapNodes.GetLength(1))
+            {
+                _mapNodes[i, j].ReduceWeight(weightRadius);
+            }
+        }
+    }
+    TransmitPath();
+}
+
+    #endregion
+
 }

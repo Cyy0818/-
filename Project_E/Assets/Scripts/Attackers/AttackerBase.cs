@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Path;
@@ -6,15 +7,10 @@ namespace Attacker
     public class AttackerBase : MonoBehaviour 
     {
         private Rigidbody _rb;
-        [SerializeField] [Header("管理器")] private WaveManager _waveManager;
         [Header("寻路")] 
         //应该记录自身所在的节点位置
         private int _curNode = 0;//当前节点
-        private Node _startNode;
-        private Node _targetNode;
-        private Node[,] _mapNodes;
-        public float passWeight = 1f;
-        public List<Node> path;
+        [SerializeField]private List<Node> path;
         public float arrivalRange = 0.3f;//检测范围阈值
         [Header("属性面板")]
         public float health;
@@ -26,10 +22,24 @@ namespace Attacker
         private void Start()
         {
             _rb = GetComponent<Rigidbody>();
-            _waveManager = GetComponentInParent<WaveManager>();
-            path = PathFinding.FindPath(_startNode, _targetNode, _mapNodes, passWeight);
+            NodeManager.PathUpdate += SetPath;//订阅到NodeManager
+            //初始化路径
+            path = NodeManager._path;
         }
 
+        private void OnDestroy()
+        {
+            NodeManager.PathUpdate -= SetPath;//取消订阅
+            WaveManager.EnemiesAliveCounter--;
+            WaveManager.TotalAttackerCounter--;
+            Debug.Log("剩余Attackers:" +  WaveManager.TotalAttackerCounter);
+        }
+
+        private void SetPath(List<Node> newPath)
+        {
+            path = newPath;
+        }
+        
         private void Update()
         {
             if (health <= 0)
@@ -45,7 +55,7 @@ namespace Attacker
 
         private void MovePosition()
         {
-            var targetPosition = new Vector3(path[_curNode].transform.position.x, path[_curNode].transform.position.y + 1, 3);
+            var targetPosition = new Vector3(path[_curNode].transform.position.x, path[_curNode].transform.position.y + 1, path[_curNode].transform.position.z);
             //Debug.Log("AttackerPostionX:" + transform.position.x + "AttackerPostionY:" + transform.position.y + "AttackerPostionZ:" + transform.position.z);
             //Debug.Log("TargetPositionX: " + targetPosition.x + "TargetPositionY: " + targetPosition.y + "TargetPositionZ: " + targetPosition.z);
             var distance = Vector3.Distance(transform.position, targetPosition);
@@ -71,38 +81,19 @@ namespace Attacker
                 }
             }
         }
-
-        public void SetNode(Node start, Node target, Node[,] mapNodes)
-        {
-            _startNode = start;
-            _targetNode = target;
-            _mapNodes = mapNodes;
-        }
         void ReachDestination()
         {
             //GameObject.Destroy(this.gameObject);
             Dead();
-        }
-        public void FindPath()
-        {
-            _startNode = path[_curNode];
-            path = PathFinding.FindPath(_startNode, _targetNode, _mapNodes, passWeight);
         }
         public void TakeDamage(float attack)
         {
             health -= attack;
         }
 
-        private void OnDestroy()
-        {
-            WaveManager.EnemiesAliveCounter--;
-        }
-
         private void Dead()
         {
-            //GameObject.Destroy(this.gameObject);
-            _waveManager._objectPool.PushObject(gameObject);
-            _waveManager.totalAttackerCounter--;
+            Destroy(gameObject);
         }
       
     }
