@@ -189,6 +189,7 @@ public class NodeManager : MonoBehaviour
         {
             for (var j = y - radius; j <= y + radius; j++)
             {
+                if(i == 0 && j == 0) continue;
                 if (i >= 0 && i < _mapNodes.GetLength(0)
                            && j >= 0 && j < _mapNodes.GetLength(1))
                 {
@@ -214,6 +215,7 @@ public static void Reduce(int x, int y, float weightNode, int radius,float weigh
     {
         for (var j = y - radius; j <= y + radius; j++)
         {
+            if(i == 0 && j == 0) continue;
             if (i >= 0 && i < _mapNodes.GetLength(0)
                        && j >= 0 && j < _mapNodes.GetLength(1))
             {
