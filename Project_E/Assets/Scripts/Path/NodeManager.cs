@@ -16,12 +16,12 @@ public class NodeManager : MonoBehaviour
 
     [Header("矩阵路径")] 
     public string matrixFilePath;
-    
+    private int[,] _matrix;
     [Header("节点信息")]
     private static Node _startNode;
     private static Node _targetNode;
     private static Node[,] _mapNodes;
-    public static List<Node> _path;
+    public static List<Node> Path;
 
     #region 地图生成和基本信息
 
@@ -32,7 +32,7 @@ public class NodeManager : MonoBehaviour
         _matrix = ReverseMatrixRows(_matrix);
         _mapNodes = new Node[_matrix.GetLength(1),_matrix.GetLength(0)];
         GenerateMap(_matrix);
-        MoveCamera2MapCenter(_matrix);
+        //MoveCamera2MapCenter(_matrix);
     }
     
 
@@ -154,10 +154,10 @@ public class NodeManager : MonoBehaviour
 
     #region 寻路管理
 
-    public static event Action<List<Node>> PathUpdate; 
+    public static event Action<Node[,]> PathUpdate; 
     public void InitPath()
     {
-        _path = FindPath(_startNode, _targetNode, _mapNodes);
+        Path = FindPath(_startNode, _targetNode, _mapNodes);
     }
     
     /// <summary>
@@ -166,8 +166,8 @@ public class NodeManager : MonoBehaviour
     private static void TransmitPath()
     {
         //将修改后的地图矩阵重新进行寻路，再使用PathUpdate广播给所有活着的敌人
-        _path = FindPath(_startNode, _targetNode, _mapNodes);
-        PathUpdate?.Invoke(_path);
+        Path = FindPath(_startNode, _targetNode, _mapNodes);
+        PathUpdate?.Invoke(_mapNodes);
     }
     
     #endregion

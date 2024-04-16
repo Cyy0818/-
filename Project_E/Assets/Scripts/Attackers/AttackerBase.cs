@@ -9,7 +9,7 @@ namespace Attacker
         private Rigidbody _rb;
         [Header("寻路")] 
         //应该记录自身所在的节点位置
-        private int _curNode = 0;//当前节点
+        [SerializeField]private int _curNode = 0;//当前节点
         [SerializeField]private List<Node> path;
         public float arrivalRange = 0.3f;//检测范围阈值
         [Header("属性面板")]
@@ -24,7 +24,7 @@ namespace Attacker
             _rb = GetComponent<Rigidbody>();
             NodeManager.PathUpdate += SetPath;//订阅到NodeManager
             //初始化路径
-            path = NodeManager._path;
+            path = NodeManager.Path;
         }
 
         private void OnDestroy()
@@ -35,9 +35,13 @@ namespace Attacker
             Debug.Log("剩余Attackers:" +  WaveManager.TotalAttackerCounter);
         }
 
-        private void SetPath(List<Node> newPath)
+        private void SetPath(Node[,] maps)
         {
-            path = newPath;
+            var start = path[_curNode];
+            var target = path[^1];
+            if(start == target) ReachDestination();
+            _curNode = 0;
+            path = PathFinding.FindPath(start, target, maps);
         }
         
         private void Update()
@@ -76,7 +80,6 @@ namespace Attacker
                 else
                 {
                     //到达终点
-                    _rb.velocity = Vector3.zero;
                     ReachDestination();
                 }
             }
@@ -84,6 +87,7 @@ namespace Attacker
         void ReachDestination()
         {
             //GameObject.Destroy(this.gameObject);
+            _rb.velocity = Vector3.zero;
             Dead();
         }
         public void TakeDamage(float attack)
