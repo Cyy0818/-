@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f84797e25500c684484bd19dcfbe31fb, type: 2}
+  - {fileID: 2100000, guid: 1b05f80e9b16916409f7e3e05e568b81, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -119,4 +119,3 @@ MonoBehaviour:
     attackRangeIndicatorPrefab: {fileID: 0}
   isUpgraded: 0
   buildEffect: {fileID: 1387575018745512, guid: b86f6c9b242c0dc4e838a2988dba6a43, type: 3}
-  nodeManager: {fileID: 7346067940241174582, guid: 533408e3fd63c994caaa14434fd62b60, type: 3}

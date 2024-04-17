@@ -114,7 +114,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 1, z: 5}
+  m_Size: {x: 3, y: 1, z: 3}
   m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!114 &5715406496490045889
 MonoBehaviour:
@@ -133,7 +133,7 @@ MonoBehaviour:
   explosionEffectPrefab: {fileID: 1837583411409002, guid: 8d54c1b9f92db964490ef2376d871c1d, type: 3}
   damageRate: 1000
   isBomb: 0
-  isMine: 1
+  isMine: 0
   explosionDamage: 500
   explosionDamageRadius: 1
   level: 0

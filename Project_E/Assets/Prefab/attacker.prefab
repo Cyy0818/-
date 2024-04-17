@@ -111,12 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aac7a4d9d5b67c4ca00c7f36ef1ded7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waveManager: {fileID: 0}
-  _startNode: {fileID: 0}
-  _targetNode: {fileID: 0}
+  _curNode: 0
   path: []
   arrivalRange: 0.05
-  health: 50
+  health: 1
   attack: 5
   attackSpeed: 4
   speed: 1

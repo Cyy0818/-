@@ -97,7 +97,9 @@ namespace Attacker
 
         private void Dead()
         {
+            Debug.Log("dead");
             Destroy(gameObject);
+            
         }
       
     }
