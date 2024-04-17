@@ -55,23 +55,19 @@ public class PlaceUnit : MonoBehaviour {
 
     void Update()
     {
-        Debug.Log("Attackers in list:");
-        foreach (var attacker in attackers)
-        {
-            Debug.Log(attacker.name);
-        }
 
         timer += Time.deltaTime;
         timeSlider.value = (float)timer / damageRate;//攻击间隔显示
         timeSlider.transform.position = this.transform.position;
-        if (timer >= attackRateTime)
+        
+        if (isBomb)
         {
             timer = 0;
-            if (isBomb)
-            {
-                Explosion();
-            }
-            else if (isMine)
+            Explosion();
+        }
+        if (attackers.Count > 0 && timer >= attackRateTime)
+        {
+            if (isMine)
             {
                 if (attackers.Count > 0)
                 {
@@ -103,39 +99,27 @@ public class PlaceUnit : MonoBehaviour {
         }
     }
 
-    void Updateattackers()
-    {
-        List<int> emptyIndex = new List<int>();
-        for (int index = 0; index < attackers.Count; index++)
-        {
-            if (attackers[index] == null)
-            {
-                emptyIndex.Add(index);
-            }
-        }
-
-        for (int i = 0; i < emptyIndex.Count; i++)
-        {
-            attackers.RemoveAt(emptyIndex[i]-i);
-        }
+    void Updateattackers()  
+    {  
+        attackers.RemoveAll(a => a == null);  
     }
-    
 
     void Explosion()
     {
         GameObject explosionEffect = GameObject.Instantiate(explosionEffectPrefab, this.transform.position + new Vector3(0, 1, 0), this.transform.rotation);
-        
-        foreach(GameObject attacker in attackers)
         {
-            if(attacker.CompareTag("Attacker"))
+            foreach(GameObject attacker in attackers)
             {
-                // 对每个攻击者造成伤害
-                attacker.GetComponent<AttackerBase>().TakeDamage(explosionDamage);
+                if(attacker.CompareTag("Attacker"))
+                {
+                    attacker.GetComponent<AttackerBase>().TakeDamage(explosionDamage);
+                }
             }
         }
-
-        // 销毁单位和爆炸特效
         Destroy(this.gameObject);
+        var x = (int)Mathf.Round(transform.position.x);
+        var y = (int)Mathf.Round(transform.position.z);
+        NodeManager.Reduce(x, y, 1, 1, 1);
         Destroy(explosionEffect, 1);
     }
 
