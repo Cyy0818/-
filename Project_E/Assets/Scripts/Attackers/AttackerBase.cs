@@ -18,6 +18,7 @@ namespace Attacker
         public float attackSpeed;
         public float speed;
         public float finialAttack;//对终点的伤害
+        private bool isAttack = false;
 
         private void Start()
         {
@@ -50,11 +51,15 @@ namespace Attacker
             {
                 Dead();
             }
+            //攻击
+            if(!isAttack)
+                Attack();
         }
 
         private void FixedUpdate()
         {
-            MovePosition();
+            if(!isAttack)
+                MovePosition();
         }
 
         private void MovePosition()
@@ -101,7 +106,25 @@ namespace Attacker
             Destroy(gameObject);
             
         }
-      
+
+        private void Attack()
+        {
+            var attackArea = path[_curNode];
+            if (attackArea.GetComponent<MapCube>().PlaceUnitGo != null //炮台
+                || attackArea.name == "Wall(Clone)")//墙
+            {
+                isAttack = true;
+                _rb.velocity = Vector3.zero;
+                Debug.Log("攻击");
+            }
+            else
+            {
+                Debug.Log("停止攻击");
+                isAttack = false;
+            }
+            
+        }
+        
     }
 
     

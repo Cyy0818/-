@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     }
     void Win()
     {
-        if (WaveManager.TotalAttackerCounter == 0)
+        if (WaveManager.TotalAttackerCounter == 0 && playerHpSlider.value != 0)
         {
             Debug.Log("win");
         }
