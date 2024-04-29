@@ -119,7 +119,7 @@ public class PlaceUnit : MonoBehaviour {
         Destroy(this.gameObject);
         var x = (int)Mathf.Round(transform.position.x);
         var y = (int)Mathf.Round(transform.position.z);
-        NodeManager.Reduce(x, y, 1, 1, 1);
+        NodeManager.ChangeWeight(x, y, 1, 1, -1);
         Destroy(explosionEffect, 1);
     }
 

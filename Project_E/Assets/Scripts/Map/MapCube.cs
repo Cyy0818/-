@@ -33,7 +33,7 @@ public class MapCube : MonoBehaviour {
         //增加权重
         var x = (int)Mathf.Round(transform.position.x);
         var y = (int)Mathf.Round(transform.position.z);
-        NodeManager.Increase(x, y, 1, 1, 1);
+        NodeManager.ChangeWeight(x, y, 1, 1, 1);
     }
 
     public void UpgradePlaceUnit()
@@ -58,7 +58,7 @@ public class MapCube : MonoBehaviour {
         //减少权重
         var x = (int)Mathf.Round(transform.position.x);
         var y = (int)Mathf.Round(transform.position.z);
-        NodeManager.Reduce(x, y, 1, 1, 1);
+        NodeManager.ChangeWeight(x, y, 1, 1, -1);
     }
 
     void OnMouseEnter()

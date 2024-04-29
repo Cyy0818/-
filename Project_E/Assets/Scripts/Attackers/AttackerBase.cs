@@ -52,8 +52,10 @@ namespace Attacker
                 Dead();
             }
             //攻击
-            if(!isAttack)
-                Attack();
+            if (!isAttack)
+            {
+            }
+            //Attack();
         }
 
         private void FixedUpdate()
